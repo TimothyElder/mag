@@ -110,15 +110,28 @@ import multiprocessing
 multiprocessing.cpu_count()
 
 authors_df = dd.read_csv(path + 'Authors.txt', sep="\t", header=None)
-new_columns = ['AuthorId', 'Rank', 'NormalizedName', 'DisplayName', 'LastKnownAffiliationId', 'PaperCount', 'PaperFamilyCount', 'CitationCount', 'CreatedDate']
+
+new_columns = ['AuthorId', 'Rank', 'NormalizedName',
+               'DisplayName', 'LastKnownAffiliationId',
+               'PaperCount', 'PaperFamilyCount',
+               'CitationCount', 'CreatedDate']
+
 authors_df = authors_df.rename(columns=dict(zip(authors_df.columns, new_columns)))
+
 authors_df.head()
 
 authors_df[authors_df['NormalizedName'] == 'jenny trinitapoli'].compute()
 
 affiliation_df = dd.read_csv(path + 'Affiliations.txt', sep="\t", header=None)
-new_columns = ['AffiliationId', 'Rank', 'NormalizedName', 'DisplayName', 'GridId', 'OfficialPage', 'WikiPage', 'PaperCount', 'PaperFamilyCount', 'CitationCount', 'Iso3166Code', 'Latitude', 'Longitude', 'CreatedDate']
+
+new_columns = ['AffiliationId', 'Rank', 'NormalizedName',
+               'DisplayName', 'GridId', 'OfficialPage',
+               'WikiPage', 'PaperCount', 'PaperFamilyCount',
+               'CitationCount', 'Iso3166Code', 'Latitude',
+               'Longitude', 'CreatedDate']
+
 affiliation_df = affiliation_df.rename(columns=dict(zip(affiliation_df.columns, new_columns)))
+
 affiliation_df.head()
 
 ids = [40347166, 921990950]
@@ -127,6 +140,10 @@ affiliation_df[affiliation_df['AffiliationId'].isin([40347166, 921990950])].comp
 # df.fruit.isin(value_list)
 
 scp -r timothyelder@midway3.rcc.uchicago.edu:/home/timothyelder/Documents/df.csv /Users/timothyelder/Documents/MAG
+
+scp filter_mag.py timothyelder@midway3.rcc.uchicago.edu:/home/timothyelder/Documents
+
+scp -r timothyelder@midway3.rcc.uchicago.edu:/home/timothyelder/Documents /Users/timothyelder/Documents/mag
 
 # droppign all rows where the person has only one paper
 df_filtered = df[df['PaperCount'] != 1]
