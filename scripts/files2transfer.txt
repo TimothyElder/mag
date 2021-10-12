@@ -1,5 +1,0 @@
-authors.csv
-authors2papers.csv
-papers.csv
-journals.csv
-edge_list.csv

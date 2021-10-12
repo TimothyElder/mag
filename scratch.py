@@ -153,9 +153,9 @@ scp net_projection.R timothyelder@cronusx.uchicago.edu:/home/timothyelder/mag/sc
 
 scp -r timothyelder@midway3.rcc.uchicago.edu:/home/timothyelder/Documents/scripts /Users/timothyelder/Desktop
 
-scp -r timothyelder@midway3.rcc.uchicago.edu:/home/timothyelder/Documents/data/disambig/edge_list.csv /Users/timothyelder/Documents/mag/data
+scp -r timothyelder@midway3.rcc.uchicago.edu:/home/timothyelder/mag/data/disambig/edge_list.csv /Users/timothyelder/Documents/mag/data
 
-scp -r timothyelder@midway3.rcc.uchicago.edu:/home/timothyelder/Documents/data/filtered_cited.csv /Users/timothyelder/Documents/mag
+scp -r timothyelder@midway3.rcc.uchicago.edu:/home/timothyelder/mag/data/filtered_cited.csv /Users/timothyelder/Documents/mag
 
 # droppign all rows where the person has only one paper
 df_filtered = df[df['PaperCount'] != 1]

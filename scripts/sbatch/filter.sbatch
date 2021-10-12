@@ -15,4 +15,4 @@ module load python
 source activate soc_of_soc
 
 # DO COMPUTE WORK
-python /home/timothyelder/Documents/scripts/filter_mag_corpus.py
+python /home/timothyelder/mag/scripts/filter_mag_corpus.py

@@ -17,14 +17,14 @@ os.chdir('/home/timothyelder/Documents')
 path = '/project/jevans/MAG_0802_2021_snap_shot/'
 
 # concatenating individual matched dataframes
-match_path = r'/home/timothyelder/Documents/data/matches'
+match_path = r'/home/timothyelder/mag/data/matches'
 all_files = glob.glob(match_path + "/*.csv")
 df_from_each_file = (pd.read_csv(f, sep=',') for f in all_files) # generate a list of files to concatenate
 
 df_merged = pd.concat(df_from_each_file, ignore_index=True) # Concatenate pandas dataframes
 
 # Saving Merged dataframe
-df_merged.to_csv("/home/timothyelder/Documents/data/authors.csv")
+df_merged.to_csv("/home/timothyelder/mag/data/authors.csv")
 
 faculty_names = df_merged.network_name.to_list()
 
@@ -55,7 +55,7 @@ authors2papers_df = authors2papers_df.rename(columns=dict(zip(authors2papers_df.
 
 filtered_authors2papers = authors2papers_df[authors2papers_df['AuthorId'].isin(df_filtered['AuthorId'])].compute()
 
-filtered_authors2papers.to_csv('/home/timothyelder/Documents/data/authors2papers.csv')
+filtered_authors2papers.to_csv('/home/timothyelder/mag/data/authors2papers.csv')
 
 papers_df = dd.read_csv(path + 'Papers.txt',
                         sep="\t", header=None, dtype={16: 'object', 17: 'object',
@@ -82,6 +82,6 @@ papers_df = papers_df.rename(columns=dict(zip(papers_df.columns, new_columns)))
 
 filtered_papers = papers_df[papers_df['PaperId'].isin(filtered_authors2papers['PaperId'])].compute()
 
-filtered_papers.to_csv('/home/timothyelder/Documents/data/papers.csv')
+filtered_papers.to_csv('/home/timothyelder/mag/data/papers.csv')
 
 print("Script complete...")

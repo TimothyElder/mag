@@ -8,7 +8,7 @@ os.chdir('/home/timothyelder/Documents/')
 pattern = r'(.+\,)(.+)' # regex for matching the first name and last name
 aux_pattern = '(\S+)(.+)' # extra pattern for when the above doesn't match
 
-faculty_df_complete = pd.read_csv("/home/timothyelder/Documents/data/faculty_df_complete.csv")
+faculty_df_complete = pd.read_csv("/home/timothyelder/mag/data/faculty_df_complete.csv")
 faculty_names = faculty_df_complete['faculty_name'].to_list()
 
 for idx,i in enumerate(faculty_names):

@@ -8,7 +8,7 @@ os.chdir('/home/timothyelder/Documents')
 
 path = '/project/jevans/MAG_0802_2021_snap_shot/'
 
-papers_df = pd.read_csv('/home/timothyelder/Documents/data/papers.csv')
+papers_df = pd.read_csv('/home/timothyelder/mag/data/papers.csv')
 
 journals_df = dd.read_csv(path + 'Journals.txt', sep="\t", header=None, dtype={5: 'object'},
                                                        error_bad_lines=False, quoting=csv.QUOTE_NONE,
@@ -27,7 +27,7 @@ journals_df = journals_df.drop(columns=['Rank', 'DisplayName', 'Issn', 'Publishe
 
 filtered_journals = journals_df[journals_df['JournalId'].isin(papers_df.JournalId)].compute()
 
-filtered_journals.to_csv('/home/timothyelder/Documents/data/journals.csv')
+filtered_journals.to_csv('/home/timothyelder/mag/data/journals.csv')
 
 
 print("Script complete...")
