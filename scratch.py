@@ -5,6 +5,14 @@ import dask.dataframe as dd
 
 import re
 
+# So the journal2journal network returned no
+# ties but checking the below dataframe shows
+# that there are many unique papers
+
+adjacency.df <- papers2journals %>%
+  group_by(JournalId) %>%
+  dplyr::summarise(weight = n())
+
 path = '/project/jevans/MAG_0802_2021_snap_shot/'
 
 
@@ -139,14 +147,23 @@ ids = [40347166, 921990950]
 affiliation_df[affiliation_df['AffiliationId'].isin([40347166, 921990950])].compute()
 # df.fruit.isin(value_list)
 
-scp -r timothyelder@midway3.rcc.uchicago.edu:/home/timothyelder/Documents/df.csv /Users/timothyelder/Documents/MAG
-
 scp filter_mag.py timothyelder@midway3.rcc.uchicago.edu:/home/timothyelder/Documents
 
-scp -r timothyelder@midway3.rcc.uchicago.edu:/home/timothyelder/Documents /Users/timothyelder/Documents/mag
+scp net_projection.R timothyelder@cronusx.uchicago.edu:/home/timothyelder/mag/scripts
+
+scp -r timothyelder@midway3.rcc.uchicago.edu:/home/timothyelder/Documents/scripts /Users/timothyelder/Desktop
+
+scp -r timothyelder@midway3.rcc.uchicago.edu:/home/timothyelder/Documents/data/disambig/edge_list.csv /Users/timothyelder/Documents/mag/data
+
+scp -r timothyelder@midway3.rcc.uchicago.edu:/home/timothyelder/Documents/data/filtered_cited.csv /Users/timothyelder/Documents/mag
 
 # droppign all rows where the person has only one paper
 df_filtered = df[df['PaperCount'] != 1]
 
 pub_counts = pd.read_csv("/Users/timothyelder/Documents/jstor_parse/dataframes/pub_counts.csv")
 jstor_metadata = pd.read_csv("/Users/timothyelder/Documents/jstor_parse/dataframes/jstor_metadata.csv")
+
+scp -r timothyelder@cronusx.uchicago.edu:/home/timothyelder/mag/scripts /Users/timothyelder/Documents/mag
+
+
+scp -r /Users/timothyelder/Documents/mag timothyelder@cronusx.uchicago.edu:/home/timothyelder
