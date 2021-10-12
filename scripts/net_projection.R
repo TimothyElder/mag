@@ -50,8 +50,8 @@ journal2journal_mat <- t(bi_mat) %*% bi_mat
 
 journal_net <- as.network(journal2journal_mat, directed = FALSE)
 
-journal2journal_mat.to_csv(
-  "/home/timothyelder/mag/data/journal2journal_mat.csv")
+write.table(journal2journal_mat,
+  file = "/home/timothyelder/mag/data/journal2journal_mat.txt")
 
-bi_mat.to_csv(
-  "/home/timothyelder/mag/data/author2journal_mat.csv")
+write.table(bi_mat,
+  file = "/home/timothyelder/mag/data/author2journal_mat.csv")
