@@ -7,6 +7,8 @@ authors2papers_df = authors2papers_df.drop(columns=['Unnamed: 0', 'AffiliationId
 
 papers_df = pd.read_csv('/home/timothyelder/Documents/data/papers.csv', low_memory=False)
 
+papers_df = papers_df[papers_df["DocType"] == "Journal"]
+
 papers_df = papers_df.drop(columns=['Unnamed: 0', 'Rank', 'Doi', 'DocType',
               'PaperTitle', 'OriginalTitle',
               'BookTitle', 'Year', 'Date',
@@ -19,8 +21,6 @@ papers_df = papers_df.drop(columns=['Unnamed: 0', 'Rank', 'Doi', 'DocType',
               'FamilyId', 'FamilyRank', 'DocSubTypes'])
 
 papers_df = papers_df.set_index("PaperId")
-
-papers_df = papers_df[papers_df["DocType"] == "Journal"]
 
 authors2papers_df = authors2papers_df.set_index("PaperId")
 
