@@ -9,3 +9,22 @@ This repo is a part of the broader [`soc_of_soc`](https://github.com/TimothyElde
 2. Filtering the full Microsoft Academic Graph corpus down to only include the probable matches using [Dask](https://dask.org/).
 
 3. Generating a network of journals in the corpus that are linked by shared authors. We use this network to help filter out non-sociologists from the dataset. The idea is that we can take eigenvector centrality scores of the journals and then score authors by how much they publish in high centrality (and therefore more likely to be sociology journals)
+
+
+#### Data
+
+This code requires data that lives in several different spots:
+
+##### Network Data from *ASA Guide to Graduate Department*
+
+The data from the ASA Guide to Graduate Department lives locally on my computer but is uploaded to two other locations. The Midway3 servers of the Reserach Computing Center of the University of Chicago and the Cronus Server of Social Science Computing Services, also at UChicago.
+
+##### Microsoft Academic Graph Data
+
+The Microsoft Academic Graph (MAG) lives on the Midway3 Servers and all the scripts related to parsing that data should be run on midway3, typically using `sbatch` scripts which describe the partitions, nodes and cores to use.
+
+here is a table to show what scripts should be run where and in what order, as well as a short description.
+
+| Script | Where Its Run | Desc |
+|:------ |:--------------|:---- |
+| `gen_edgelist.py` | Midway3 | this makes something |
