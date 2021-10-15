@@ -20,6 +20,8 @@ papers_df = papers_df.drop(columns=['Unnamed: 0', 'Rank', 'Doi', 'DocType',
 
 papers_df = papers_df.set_index("PaperId")
 
+papers_df = papers_df[papers_df["DocType"] == "Journal"]
+
 authors2papers_df = authors2papers_df.set_index("PaperId")
 
 edge_list_df = papers_df.merge(authors2papers_df, how='left', on='PaperId')

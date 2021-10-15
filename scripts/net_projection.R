@@ -30,7 +30,7 @@ name_edgelist <- function(graph_object){
   return(n)
 }
 
-papers2journals <- read.csv("/home/timothyelder/mag/data/edge_list.csv")
+papers2journals <- read.csv("data/edge_list.csv")
 
 papers2journals <- na.omit(papers2journals)
 
@@ -51,7 +51,7 @@ journal2journal_mat <- t(bi_mat) %*% bi_mat
 journal_net <- as.network(journal2journal_mat, directed = FALSE)
 
 write.table(journal2journal_mat,
-  file = "/home/timothyelder/mag/data/journal2journal_mat.txt")
+  file = "/Users/timothyelder/Documents/mag/data/journal2journal_mat.txt")
 
 write.table(bi_mat,
-  file = "/home/timothyelder/mag/data/author2journal_mat.csv")
+  file = "/Users/timothyelder/Documents/mag/data/author2journal_mat.csv")
