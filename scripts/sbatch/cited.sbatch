@@ -5,7 +5,7 @@
 #SBATCH --partition=caslake
 #SBATCH --ntasks-per-node=1  # number of tasks
 #SBATCH --cpus-per-task=20    # number of threads per task
-#SBATCH --output=return_cited.out
+#SBATCH --output=/home/timothyelder/mag/scripts/logs/return_cited.out
 
 # LOAD MODULES
 module load python
