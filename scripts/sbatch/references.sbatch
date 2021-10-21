@@ -14,4 +14,4 @@ module load python
 source activate soc_of_soc
 
 # DO COMPUTE WORK
-python return_references.py
+python /home/timothyelder/mag/scripts/filter_references.py

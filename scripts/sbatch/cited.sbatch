@@ -14,4 +14,4 @@ module load python
 source activate soc_of_soc
 
 # DO COMPUTE WORK
-python return_cited.py
+python /home/timothyelder/mag/scripts/filter_cited.py

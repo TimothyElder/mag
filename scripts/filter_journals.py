@@ -27,7 +27,7 @@ journals_df = journals_df.drop(columns=['Rank', 'DisplayName', 'Issn', 'Publishe
 
 filtered_journals = journals_df[journals_df['JournalId'].isin(papers_df.JournalId)].compute()
 
-filtered_journals.to_csv('/home/timothyelder/mag/data/journals.csv')
+filtered_journals.to_csv('/home/timothyelder/mag/data/journals.csv', index=False)
 
 
 print("Script complete...")
