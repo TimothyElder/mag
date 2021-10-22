@@ -67,11 +67,6 @@ for i in os.listdir(data_dir):
                                              left_on = "network_name",
                                              right_on = "NormalizedName")
 
-        df_filtered = fuzzy_matches[fuzzy_matches['network_name'] != fuzzy_matches['NormalizedName']] #drop exact matches
-        df_filtered = df_filtered.dropna(subset=['NormalizedName']) # drop NAs in right dataset
-       #df_filtered = df_filtered.sort_values("best_match_score", ascending=False) # sort so highest values are first
-       #df_filtered = df_filtered.drop_duplicates(subset = 'network_name', keep = "first")
+        fuzzy_matches.to_csv(save_dir + 'matched_' + i)
 
-        df_filtered.to_csv(save_dir + 'matched_' + i)
-
-print("script complete...proceed to check fuzzy matche...")
+print("script complete......")
