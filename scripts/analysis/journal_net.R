@@ -2,14 +2,14 @@ library(tidyverse)
 library(network)
 library(sna)
 
-#setwd("/home/timothyelder/mag")
+#setwd("/Users//timothyelder/Documents/mag")
 
-journal2journal <- read.csv("data/journal2journal_mat.csv")
+journal2journal <- read.table("data/journal2journal_mat.txt")
 
 papers2journals <- read.csv("data/edge_list.csv")
 
 authors <- read.csv("data/authors.csv")
-authors2journals <- read.csv("data/authors2journals.csv")
+authors2journals <- read.table("data/authors2journals.csv")
 
 authors <- authors %>% 
   select(network_name, AuthorId)
