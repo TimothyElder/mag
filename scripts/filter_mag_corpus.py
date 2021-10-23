@@ -38,8 +38,8 @@ df_merged.network_name = faculty_names
 # Exact matches
 df = df_merged[df_merged['network_name'] == df_merged['NormalizedName']]
 
-# Keeping only matches above .4 match scrore
-df_filtered = df.append(df_merged[df_merged['best_match_score'] >= .4])
+# Keeping only matches above .9 match scrore
+df_filtered = df.append(df_merged[df_merged['best_match_score'] >= .9])
 
 authors2papers_df = dd.read_csv(path + 'PaperAuthorAffiliations.txt',
                                            sep="\t", header=None,

@@ -1,15 +1,15 @@
 import pandas as pd
 
-authors2papers_df = pd.read_csv('/home/timothyelder/Documents/data/authors2papers.csv')
+authors2papers_df = pd.read_csv('/home/timothyelder/mag/data/authors2papers.csv')
 
-authors2papers_df = authors2papers_df.drop(columns=['Unnamed: 0', 'AffiliationId', 'AuthorSequenceNumber',
+authors2papers_df = authors2papers_df.drop(columns=['AffiliationId', 'AuthorSequenceNumber',
                                 'OriginalAuthor', 'OriginalAffiliation'])
 
-papers_df = pd.read_csv('/home/timothyelder/Documents/data/papers.csv', low_memory=False)
+papers_df = pd.read_csv('/home/timothyelder/mag/data/papers.csv', low_memory=False)
 
 papers_df = papers_df[papers_df["DocType"] == "Journal"]
 
-papers_df = papers_df.drop(columns=['Unnamed: 0', 'Rank', 'Doi', 'DocType',
+papers_df = papers_df.drop(columns=['Rank', 'Doi', 'DocType',
               'PaperTitle', 'OriginalTitle',
               'BookTitle', 'Year', 'Date',
               'OnlineDate', 'Publisher',
@@ -29,4 +29,4 @@ edge_list_df = papers_df.merge(authors2papers_df, how='left', on='PaperId')
 if len(papers_df.index) == len(edge_list_df.index):
     print("script successeful")
 
-edge_list_df.to_csv('/home/timothyelder/Documents/data/edge_list.csv')
+edge_list_df.to_csv('/home/timothyelder/mag/data/edge_list.csv')

@@ -25,6 +25,11 @@ The Microsoft Academic Graph (MAG) lives on the Midway3 Servers and all the scri
 
 here is a table to show what scripts should be run where and in what order, as well as a short description.
 
-| Script | Where Its Run | Desc |
-|:------ |:--------------|:---- |
-| `gen_edgelist.py` | Midway3 | this makes something |
+|       Script          | Type     |  Where To Run |                                Description                              |
+|:----------------------|----------|:--------------|:------------------------------------------------------------------------|
+| `fuzzy_matches.py`    | Data     |    Midway3    | Performs fuzzy matching produces many csvs     |
+| `filter_mag_corpus.py`| Data     |    Midway3    | Filters out the complete MAG data down to the names we feed it |
+| `filter_journals.py`  | Data     |    Midway3    | Does the same but now for journals |
+| `gen_edgelist.py`     | Data     |     Local     | Creates two-mode edgelist between auothrs and journals |
+| `net_project.R`       | Data     |     Local     | Projects the two-mode network to a one-mode, journal to journal network |
+| `journal_net.R`       | Analysis |     Local     | Performs first analyses on the journal to journal network |
