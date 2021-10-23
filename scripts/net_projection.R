@@ -16,6 +16,8 @@ papers2journals <- as.data.frame(papers2journals)
 
 bi_net <- network(papers2journals, bipartite = TRUE)
 
+rm(papers2journals)
+
 bi_mat <- as.matrix(bi_net)
 
 journal2journal_mat <- t(bi_mat) %*% bi_mat
@@ -24,6 +26,8 @@ journal_net <- as.network(journal2journal_mat, directed = FALSE)
 
 write.table(journal2journal_mat,
   file = "/home/timothyelder/mag/data/journal2journal_mat.txt")
+
+rm(journal2journal_mat)
 
 write.table(bi_mat,
   file = "/home/timothyelder/mag/data/author2journal_mat.txt")
