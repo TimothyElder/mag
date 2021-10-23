@@ -30,6 +30,6 @@ here is a table to show what scripts should be run where and in what order, as w
 | `fuzzy_matches.py`    | Data     |    Midway3    | Performs fuzzy matching produces many csvs     |
 | `filter_mag_corpus.py`| Data     |    Midway3    | Filters out the complete MAG data down to the names we feed it |
 | `filter_journals.py`  | Data     |    Midway3    | Does the same but now for journals |
-| `gen_edgelist.py`     | Data     |     Local     | Creates two-mode edgelist between auothrs and journals |
-| `net_project.R`       | Data     |     Local     | Projects the two-mode network to a one-mode, journal to journal network |
+| `gen_edgelist.py`     | Data     |    Midway3    | Creates two-mode edgelist between auothrs and journals |
+| `net_project.R`       | Data     |    Midway3    | Projects the two-mode network to a one-mode, journal to journal network |
 | `journal_net.R`       | Analysis |     Local     | Performs first analyses on the journal to journal network |
