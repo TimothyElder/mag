@@ -28,4 +28,34 @@ filtered_references_df = references_df[references_df['PaperReferenceId'].isin(fi
 
 filtered_references_df.to_csv('/home/timothyelder/mag/data/citing.csv', index=False)
 
+# need to add to this script: get the paper information that now appeaars in the PaperId column of 
+# he filtered_references_df dataframe, then save that as citing_papers.csv
+
+papers_df = dd.read_csv(path + 'Papers.txt',
+                        sep="\t", header=None, dtype={16: 'object', 17: 'object',
+                                                      18: 'float64', 19: 'float64',
+                                                      20: 'float64', 24: 'object',
+                                                       7: 'float64', 9: 'object',
+                                                       8: 'string', 14: 'float64'},
+                                                       error_bad_lines=False, quoting=csv.QUOTE_NONE,
+                                                       encoding='utf-8')
+
+new_columns =['PaperId', 'Rank', 'Doi', 'DocType',
+              'PaperTitle', 'OriginalTitle',
+              'BookTitle', 'Year', 'Date',
+              'OnlineDate', 'Publisher',
+              'JournalId', 'ConferenceSeriesId',
+              'ConferenceInstanceId', 'Volume',
+              'Issue', 'FirstPage', 'LastPage',
+              'ReferenceCount', 'CitationCount',
+              'EstimatedCitation', 'OriginalVenue',
+              'FamilyId', 'FamilyRank', 'DocSubTypes',
+              'CreatedDate']
+
+papers_df = papers_df.rename(columns=dict(zip(papers_df.columns, new_columns)))
+
+filtered_papers = papers_df[papers_df['PaperId'].isin(filtered_references_df['PaperId'])].compute()
+
+filtered_papers.to_csv('/home/timothyelder/mag/data/citing_papers.csv', index=False)
+
 print("Script complete...")
