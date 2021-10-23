@@ -2,11 +2,10 @@ library(tidyverse)
 library(network)
 library(sna)
 
-#setwd("/Users//timothyelder/Documents/mag")
+setwd("/Users//timothyelder/Documents/mag")
 
+# Journal to Journal Matrix 
 journal2journal <- read.table("data/journal2journal_mat.txt")
-
-papers2journals <- read.csv("data/edge_list.csv")
 
 authors <- read.csv("data/authors.csv")
 authors2journals <- read.table("data/authors2journals.csv")
@@ -14,8 +13,8 @@ authors2journals <- read.table("data/authors2journals.csv")
 authors <- authors %>% 
   select(network_name, AuthorId)
 
-df <- read.csv('data/journals.csv')
-df <- df[,2:3]
+journal_names <- read.csv('data/journals.csv')
+journal_names <- journal_names[,2:3]
 
 sum(journal2journal)
 
@@ -23,6 +22,8 @@ sum(journal2journal)
 colnames(journal2journal) <- sub("X", "", colnames(journal2journal))
 
 journal2journal <- as.matrix(journal2journal)
+
+papers2journals <- read.csv("data/edge_list.csv")
 
 journal_net <- as.network(journal2journal, matrix.type = "adjacency", ignore.eval = FALSE, names.eval = "weight", loops = TRUE)
 
@@ -39,9 +40,7 @@ journal_df <- data.frame(JournalId, eigen, prank$vector, degree)
 
 journal_df <- journal_df[order(-journal_df$eigen),]
 
-journal_df <- select(journal_df, -X)
-
-journal_df <- merge(journal_df, df, by = "JournalId")
+journal_df <- merge(journal_df, journal_names, by = "JournalId")
 
 journal_df$eigen[1:10]
 
@@ -88,7 +87,7 @@ articles <- ggplot(authors_df, aes(x = n)) + geom_density() + ggtitle("Author NU
 
 all.g <- ggpubr::ggarrange(eig, prank, deg, articles)
 
-ggsave("author_scores.pdf", all.g)
+#ggsave("author_scores.pdf", all.g)
 
 #### HISTOGRAMS #####
 
