@@ -4,7 +4,7 @@ library(sna)
 
 #setwd("/home/timothyelder/mag")
 
-journal2journal <- read.table("data/journal2journal_mat.txt")
+journal2journal <- read.csv("data/journal2journal_mat.csv")
 
 papers2journals <- read.csv("data/edge_list.csv")
 

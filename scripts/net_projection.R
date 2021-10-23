@@ -1,34 +1,6 @@
 library("network")
 
-# Return Named Edge List
-name_edgelist <- function(graph_object){
-
-  # Return an edgelst from the gaph object
-  # that is named rather than using nodeIDs
-
-  names <- graph_object %v% "vertex.names"
-
-  numbers <- 1:network.size(graph_object)
-
-  df <- as.data.frame(cbind(names, numbers))
-
-  n <- as.data.frame(as.edgelist(graph_object))
-
-  n$V1 <- plyr::mapvalues(n$V1,
-                          from = numbers,
-                          to = names,
-                          warn_missing = FALSE)
-
-  n$V2 <- plyr::mapvalues(n$V2,
-                          from=numbers,
-                          to=names,
-                          warn_missing = FALSE)
-
-  n <- n %>%
-    rename("PaperId" = "V1",
-           "JournalId" = "V2")
-  return(n)
-}
+setwd('/home/timothyelder/mag')
 
 papers2journals <- read.csv("data/edge_list.csv")
 
@@ -51,7 +23,7 @@ journal2journal_mat <- t(bi_mat) %*% bi_mat
 journal_net <- as.network(journal2journal_mat, directed = FALSE)
 
 write.table(journal2journal_mat,
-  file = "/Users/timothyelder/Documents/mag/data/journal2journal_mat.txt")
+  file = "/Users/timothyelder/mag/data/journal2journal_mat.csv")
 
 write.table(bi_mat,
-  file = "/Users/timothyelder/Documents/mag/data/author2journal_mat.csv")
+  file = "/Users/timothyelder/mag/data/author2journal_mat.csv")
