@@ -166,4 +166,23 @@ jstor_metadata = pd.read_csv("/Users/timothyelder/Documents/jstor_parse/datafram
 scp -r timothyelder@cronusx.uchicago.edu:/home/timothyelder/mag/scripts /Users/timothyelder/Documents/mag
 
 
-scp -r /Users/timothyelder/Documents/mag timothyelder@cronusx.uchicago.edu:/home/timothyelder
+scp /home/timothyelder/mag/data/author2journal_mat.txt timothyelder@cronusx.uchicago.edu:/home/timothyelder
+
+# For printing rows that contain a substrng
+authors_df[authors_df['NormalizedName'].str.contains('levi martin')]
+
+
+textfile = open("data/faculty_names.txt", "w")
+for element in faculty_names:
+    textfile.write(element + "\n")
+textfile.close()
+
+
+with open("data/faculty_names.txt", "w") as f:
+    f.write(json.dumps(faculty_names))
+
+#Now read the file back into a Python list object
+with open("data/faculty_names.txt", "r") as f:
+    faculty_names = json.loads(f.read())
+
+    object.size(x, units = "Gb")
