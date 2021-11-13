@@ -1,0 +1,54 @@
+Traceback (most recent call last):
+  File "/home/timothyelder/.conda/envs/soc_of_soc/lib/python3.7/site-packages/dask/dataframe/io/csv.py", line 752, in _write_csv
+    df.to_csv(f, **kwargs)
+  File "/home/timothyelder/.conda/envs/soc_of_soc/lib/python3.7/site-packages/pandas/core/generic.py", line 3482, in to_csv
+    storage_options=storage_options,
+  File "/home/timothyelder/.conda/envs/soc_of_soc/lib/python3.7/site-packages/pandas/io/formats/format.py", line 1105, in to_csv
+    csv_formatter.save()
+  File "/home/timothyelder/.conda/envs/soc_of_soc/lib/python3.7/site-packages/pandas/io/formats/csvs.py", line 257, in save
+    self._save()
+  File "/home/timothyelder/.conda/envs/soc_of_soc/lib/python3.7/site-packages/pandas/io/formats/csvs.py", line 262, in _save
+    self._save_body()
+  File "/home/timothyelder/.conda/envs/soc_of_soc/lib/python3.7/site-packages/pandas/io/formats/csvs.py", line 300, in _save_body
+    self._save_chunk(start_i, end_i)
+  File "/home/timothyelder/.conda/envs/soc_of_soc/lib/python3.7/site-packages/pandas/io/formats/csvs.py", line 316, in _save_chunk
+    self.writer,
+  File "pandas/_libs/writers.pyx", line 72, in pandas._libs.writers.write_csv_rows
+  File "/home/timothyelder/.conda/envs/soc_of_soc/lib/python3.7/site-packages/fsspec/implementations/local.py", line 303, in write
+    return self.f.write(*args, **kwargs)
+OSError: [Errno 122] Disk quota exceeded
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/timothyelder/mag/scripts/split_authors_csv.py", line 16, in <module>
+    o = authors_df.to_csv("/home/timothyelder/mag/data/authors_csvs/part_*.csv", index=False)
+  File "/home/timothyelder/.conda/envs/soc_of_soc/lib/python3.7/site-packages/dask/dataframe/core.py", line 1488, in to_csv
+    return to_csv(self, filename, **kwargs)
+  File "/home/timothyelder/.conda/envs/soc_of_soc/lib/python3.7/site-packages/dask/dataframe/io/csv.py", line 940, in to_csv
+    dask.compute(*values, **compute_kwargs)
+  File "/home/timothyelder/.conda/envs/soc_of_soc/lib/python3.7/site-packages/dask/base.py", line 568, in compute
+    results = schedule(dsk, keys, **kwargs)
+  File "/home/timothyelder/.conda/envs/soc_of_soc/lib/python3.7/site-packages/dask/threaded.py", line 87, in get
+    **kwargs
+  File "/home/timothyelder/.conda/envs/soc_of_soc/lib/python3.7/site-packages/dask/local.py", line 517, in get_async
+    raise_exception(exc, tb)
+  File "/home/timothyelder/.conda/envs/soc_of_soc/lib/python3.7/site-packages/dask/local.py", line 325, in reraise
+    raise exc
+  File "/home/timothyelder/.conda/envs/soc_of_soc/lib/python3.7/site-packages/dask/local.py", line 223, in execute_task
+    result = _execute_task(task, data)
+  File "/home/timothyelder/.conda/envs/soc_of_soc/lib/python3.7/site-packages/dask/core.py", line 121, in _execute_task
+    return func(*(_execute_task(a, cache) for a in args))
+  File "/home/timothyelder/.conda/envs/soc_of_soc/lib/python3.7/site-packages/dask/utils.py", line 35, in apply
+    return func(*args, **kwargs)
+  File "/home/timothyelder/.conda/envs/soc_of_soc/lib/python3.7/site-packages/dask/dataframe/io/csv.py", line 752, in _write_csv
+    df.to_csv(f, **kwargs)
+  File "/home/timothyelder/.conda/envs/soc_of_soc/lib/python3.7/site-packages/fsspec/core.py", line 121, in __exit__
+    self.close()
+  File "/home/timothyelder/.conda/envs/soc_of_soc/lib/python3.7/site-packages/fsspec/core.py", line 150, in close
+    _close(self.fobjects, self.mode)
+  File "/home/timothyelder/.conda/envs/soc_of_soc/lib/python3.7/site-packages/fsspec/core.py", line 210, in _close
+    f.close()
+  File "/home/timothyelder/.conda/envs/soc_of_soc/lib/python3.7/site-packages/fsspec/implementations/local.py", line 318, in close
+    return self.f.close()
+OSError: [Errno 122] Disk quota exceeded

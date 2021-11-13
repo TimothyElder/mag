@@ -1,0 +1,19 @@
+/home/timothyelder/.conda/envs/soc_of_soc/lib/python3.7/site-packages/dask/dataframe/io/csv.py:737: FutureWarning: The error_bad_lines argument has been deprecated and will be removed in a future version.
+
+
+  **kwargs,
+/home/timothyelder/.conda/envs/soc_of_soc/lib/python3.7/site-packages/dask/dataframe/io/csv.py:134: FutureWarning: The error_bad_lines argument has been deprecated and will be removed in a future version.
+
+
+  path_info,
+/home/timothyelder/.conda/envs/soc_of_soc/lib/python3.7/site-packages/dask/dataframe/io/csv.py:737: FutureWarning: The error_bad_lines argument has been deprecated and will be removed in a future version.
+
+
+  **kwargs,
+/home/timothyelder/.conda/envs/soc_of_soc/lib/python3.7/site-packages/dask/dataframe/io/csv.py:134: FutureWarning: The error_bad_lines argument has been deprecated and will be removed in a future version.
+
+
+  path_info,
+/home/timothyelder/.conda/envs/soc_of_soc/lib/python3.7/site-packages/dask/dataframe/io/csv.py:134: DtypeWarning: Columns (6) have mixed types.Specify dtype option on import or set low_memory=False.
+  path_info,
+Script complete...
