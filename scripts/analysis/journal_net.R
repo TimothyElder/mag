@@ -2,13 +2,15 @@ library(tidyverse)
 library(network)
 library(sna)
 
-setwd("/Users//timothyelder/Documents/mag")
+setwd("/Users/timothyelder/Documents/mag")
 
 # Journal to Journal Matrix 
 journal2journal <- read.table("data/journal2journal_mat.txt")
 
-authors <- read.csv("data/authors.csv")
-authors2journals <- read.table("data/authors2journals.csv")
+authors <- read.csv("/Users/timothyelder/Documents/mag/data/authors.csv")
+el <- read.csv("data/edge_list.csv")
+authors2journals <- el %>% select(JournalId, AuthorId)
+#authors2journals <- read.table("data/authors2journals.csv")
 
 authors <- authors %>% 
   select(network_name, AuthorId)
@@ -27,20 +29,35 @@ papers2journals <- read.csv("data/edge_list.csv")
 
 journal_net <- as.network(journal2journal, matrix.type = "adjacency", ignore.eval = FALSE, names.eval = "weight", loops = TRUE)
 
-rm(journal2journal)
-
 network.density(journal_net)
+
+#pcout <- prcomp(journal2journal)
 
 eigen <- evcent(journal_net)
 JournalId <- journal_net %v% "vertex.names"
 degree <- degree(journal_net)
 prank <- igraph::page_rank(intergraph::asIgraph(journal_net), damping = 0.85)
 
-journal_df <- data.frame(JournalId, eigen, prank$vector, degree)
+pcoutrot_2 <- pcout$rotation[,2]
+pcoutrot_1 <- pcout$rotation[,1]
+pcoutrot_1 <- pcoutrot_1 *-1
 
-journal_df <- journal_df[order(-journal_df$eigen),]
+journal_df <- data.frame(JournalId, eigen, prank$vector, degree, pcoutrot_1, pcoutrot_2)
+
+journal_df <- journal_df[order(journal_df$pcoutrot_1),]
+journal_df <- journal_df[order(-journal_df$pcoutrot_1),]
 
 journal_df <- merge(journal_df, journal_names, by = "JournalId")
+
+range(journal_df$pcoutrot_1)
+
+journal_df$pcoutrot_1[journal_df$pcoutrot_1 < 0 ] <- 0
+
+journal_df$pcoutrot_sqrt<-sqrt(journal_df$pcoutrot_1)
+
+# we really only need the pcoutrot_1
+
+journal_df <- journal_df[order(-journal_df$pcoutrot_1),]
 
 journal_df$eigen[1:10]
 
@@ -72,11 +89,10 @@ another_df <- merge(papers2journals, journal_df, by = "JournalId")
 
 authors_df <- merge(another_df, authors, by = "AuthorId")
 
-
 authors_df <- authors_df %>% 
   group_by(network_name) %>%
-  summarise(eigen_mean = mean(eigen), prank_mean = mean(prank.vector), n = n(), degree_mean = mean(degree))
-  
+  summarise(eigen_mean = mean(eigen), prank_mean = mean(prank.vector), n = n(), degree_mean = mean(degree), pca_mean = mean(pcoutrot_1))
+
 eig <- ggplot(authors_df, aes(x = eigen_mean)) + geom_density() + ggtitle("Author Mean Eigen")
 
 prank <- ggplot(authors_df, aes(x = prank_mean)) + geom_density() + ggtitle("Authors Mean Page Rank")
@@ -85,9 +101,11 @@ deg <- ggplot(authors_df, aes(x = degree_mean)) + geom_density() + ggtitle("Auth
 
 articles <- ggplot(authors_df, aes(x = n)) + geom_density() + ggtitle("Author NUmber of Articles")
 
-all.g <- ggpubr::ggarrange(eig, prank, deg, articles)
+pca <- ggplot(authors_df, aes(x = pca_mean)) + geom_density() 
 
-#ggsave("author_scores.pdf", all.g)
+all.g <- ggpubr::ggarrange(eig, prank, deg, articles, pca)
+
+ggsave("author_scores.pdf", all.g)
 
 #### HISTOGRAMS #####
 
@@ -99,7 +117,9 @@ deg <- ggplot(authors_df, aes(x = degree_mean)) + geom_histogram() + ggtitle("Au
 
 articles <- ggplot(authors_df, aes(x = n)) + geom_histogram() + ggtitle("Author NUmber of Articles")
 
-all.g <- ggpubr::ggarrange(eig, prank, deg, articles)
+pca <- ggplot(authors_df, aes(x = pca_mean)) + geom_histogram() 
+
+all.g <- ggpubr::ggarrange(eig, prank, deg, articles, pca)
 
 ggsave("author_scores_hist.pdf", all.g)
 
@@ -108,3 +128,5 @@ ggplot(journal_df, aes(x = eigen)) + geom_density()
 ggplot(journal_df, aes(x = prank.vector)) + geom_density()
 
 ggplot(journal_df, aes(x = degree)) + geom_density()
+
+ggplot(journal_df, aes(x = pcoutrot_1)) + geom_density()

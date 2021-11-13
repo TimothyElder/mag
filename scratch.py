@@ -185,4 +185,5 @@ with open("data/faculty_names.txt", "w") as f:
 with open("data/faculty_names.txt", "r") as f:
     faculty_names = json.loads(f.read())
 
-    object.size(x, units = "Gb")
+
+scp faculty_df_complete.csv timothyelder@midway3.rcc.uchicago.edu:/home/timothyelder/mag/data
