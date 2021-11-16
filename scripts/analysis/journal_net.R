@@ -2,26 +2,32 @@ library(tidyverse)
 library(network)
 library(sna)
 
+#change this depending on whether you are local or on midway
 setwd("/Users/timothyelder/Documents/mag")
+setwd("/home/timothyelder/mag")
 
 # Journal to Journal Matrix 
 journal2journal <- read.table("data/journal2journal_mat.txt")
+journal2journal <- read.csv("data.csv")
 
-authors <- read.csv("/Users/timothyelder/Documents/mag/data/authors.csv")
+rownames(journal2journal) <- journal2journal$X
+journal2journal <- journal2journal %>% select(-X)
+
+# removing x from column names so the matrix is totally symmetric
+colnames(journal2journal) <- sub("X", "", colnames(journal2journal))
+
+authors <- read.csv("data/authors.csv")
 el <- read.csv("data/edge_list.csv")
 authors2journals <- el %>% select(JournalId, AuthorId)
 #authors2journals <- read.table("data/authors2journals.csv")
 
 authors <- authors %>% 
-  select(network_name, AuthorId)
+  select(NormalizedName, AuthorId)
 
 journal_names <- read.csv('data/journals.csv')
 journal_names <- journal_names[,2:3]
 
 sum(journal2journal)
-
-# removing x from column names so the matrix is totally symmetric
-colnames(journal2journal) <- sub("X", "", colnames(journal2journal))
 
 journal2journal <- as.matrix(journal2journal)
 
@@ -31,7 +37,7 @@ journal_net <- as.network(journal2journal, matrix.type = "adjacency", ignore.eva
 
 network.density(journal_net)
 
-#pcout <- prcomp(journal2journal)
+pcout <- prcomp(journal2journal)
 
 eigen <- evcent(journal_net)
 JournalId <- journal_net %v% "vertex.names"
