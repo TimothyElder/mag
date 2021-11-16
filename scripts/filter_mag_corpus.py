@@ -12,23 +12,12 @@ import glob
 import pandas as pd
 import dask.dataframe as dd
 
-os.chdir('/home/timothyelder/Documents')
+os.chdir('/home/timothyelder/mag')
 
 path = '/project/jevans/MAG_0802_2021_snap_shot/'
 
-# Load authors dataframe from MAG
-authors_df = dd.read_csv(path + 'Authors.txt', sep="\t",
-                         header=None, error_bad_lines=False)
-
-new_columns = ['AuthorId', 'Rank',
-               'NormalizedName', 'DisplayName',
-               'LastKnownAffiliationId', 'PaperCount',
-               'PaperFamilyCount', 'CitationCount', 'CreatedDate']
-
-authors_df = authors_df.rename(columns=dict(zip(authors_df.columns, new_columns)))
-
 # Filter authors dataframe for authors that appear in network data.
-filtered_authors = authors_df[authors_df['NormalizedName'].isin(faculty_names)].compute()
+filtered_authors = pd.read_csv("data/authors.csv")
 
 authors2papers_df = dd.read_csv(path + 'PaperAuthorAffiliations.txt',
                                            sep="\t", header=None,
@@ -42,7 +31,7 @@ new_columns = ['PaperId', 'AuthorId',
 
 authors2papers_df = authors2papers_df.rename(columns=dict(zip(authors2papers_df.columns, new_columns)))
 
-filtered_authors2papers = authors2papers_df[authors2papers_df['AuthorId'].isin(df_filtered['AuthorId'])].compute()
+filtered_authors2papers = authors2papers_df[authors2papers_df['AuthorId'].isin(filtered_authors['AuthorId'])].compute()
 
 filtered_authors2papers.to_csv('/home/timothyelder/mag/data/authors2papers.csv', index=False)
 

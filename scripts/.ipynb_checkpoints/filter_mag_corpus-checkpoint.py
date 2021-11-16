@@ -12,34 +12,12 @@ import glob
 import pandas as pd
 import dask.dataframe as dd
 
-os.chdir('/home/timothyelder/Documents')
+os.chdir('/home/timothyelder/mag')
 
 path = '/project/jevans/MAG_0802_2021_snap_shot/'
 
-# concatenating individual matched dataframes
-match_path = r'/home/timothyelder/mag/data/matches'
-all_files = glob.glob(match_path + "/*.csv")
-df_from_each_file = (pd.read_csv(f, sep=',') for f in all_files) # generate a list of files to concatenate
-
-df_merged = pd.concat(df_from_each_file, ignore_index=True) # Concatenate pandas dataframes
-
-# Saving Merged dataframe
-df_merged.to_csv("/home/timothyelder/mag/data/authors.csv", index=False)
-
-faculty_names = df_merged.network_name.to_list()
-
-# for index and name in faculty names
-for idx,i in enumerate(faculty_names):
-    i = re.sub(r'\.', '', i) # replace semi-colons with commas
-    faculty_names[idx] = i # substitute original name with normalized name
-
-df_merged.network_name = faculty_names
-
-# Exact matches
-df = df_merged[df_merged['network_name'] == df_merged['NormalizedName']]
-
-# Keeping only matches above .9 match scrore
-df_filtered = df.append(df_merged[df_merged['best_match_score'] >= .9])
+# Filter authors dataframe for authors that appear in network data.
+filtered_authors = pd.read_csv("data/authors.csv")
 
 authors2papers_df = dd.read_csv(path + 'PaperAuthorAffiliations.txt',
                                            sep="\t", header=None,
@@ -53,7 +31,7 @@ new_columns = ['PaperId', 'AuthorId',
 
 authors2papers_df = authors2papers_df.rename(columns=dict(zip(authors2papers_df.columns, new_columns)))
 
-filtered_authors2papers = authors2papers_df[authors2papers_df['AuthorId'].isin(df_filtered['AuthorId'])].compute()
+filtered_authors2papers = authors2papers_df[authors2papers_df['AuthorId'].isin(filtered_authors['AuthorId'])].compute()
 
 filtered_authors2papers.to_csv('/home/timothyelder/mag/data/authors2papers.csv', index=False)
 
