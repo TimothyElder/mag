@@ -41,3 +41,5 @@ Thumbs.db
 # Misc Things I Don't Want Tracked #
 ####################################
 /Users/timothyelder/Documents/mag/scripts/notebooks
+
+.ipynb_checkpoints
