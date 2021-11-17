@@ -32,7 +32,8 @@ here is a table to show what scripts should be run where and in what order, as w
 |       Script          | Type     |  Where To Run |                                Description                              | Output |
 |:----------------------|----------|:--------------|:------------------------------------------------------------------------|--------
 | `fuzzy_matches.py`    | Data     |    Midway3    | Performs fuzzy matching produces many csvs     |       `/matches`        |
-| `filter_mag_corpus.py`| Data     |    Midway3    | Filters out the complete MAG data down to the names we feed it |  `authors.csv, authors2papers.csv, papers.csv`   |
+| `get_author_candidates.py`    | Data     |    Midway3    | filters the MAG corpus to get authors from fuzzy matching and saves key of faculty to author names from fuzzy matching     |       `key_faculty2authors.csv, authors.csv`        |
+| `filter_mag_corpus.py`| Data     |    Midway3    | Filters out the complete MAG data down to the names we feed it |  `authors2papers.csv, papers.csv`   |
 | `filter_journals.py`  | Data     |    Midway3    | Does the same but now for journals |    `journals.csv`     |
 | `filtered_cited`      | Data     |    Midway3    | Filters papers to get only the ones citing our authors papers |   `citing.csv`     |
 | `net_project.py`      | Data     |    Midway3    | Projects the two-mode network to a one-mode, journal to journal network |  `journal2journal_mat.csv`, `authors2journals_mat.csv`      |
