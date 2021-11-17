@@ -1,7 +1,5 @@
 # mag
 
-squeue --user=timothyelder --start --iterate=10_seconds
-
 ### Measuring Scholarly Productibity of Sociologists Using Microsoft Academic Graph
 
 This repo is a part of the broader [`soc_of_soc`](https://github.com/TimothyElder/soc_of_soc) project. With the scripts in this repository we complete several steps toward analyzing the individual academic productivity using the [Microsoft Academic Graph](https://www.microsoft.com/en-us/research/project/microsoft-academic-graph/) corpus. The primary objective here is linking the network data to the publication data through probabilistic matching and some network analysis of journals. 
