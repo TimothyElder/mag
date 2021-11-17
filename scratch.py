@@ -187,3 +187,6 @@ with open("data/faculty_names.txt", "r") as f:
 
 
 scp faculty_df_complete.csv timothyelder@midway3.rcc.uchicago.edu:/home/timothyelder/mag/data
+
+# for SCP the complete directory to JLMSHARE
+scp -r /mag timothyelder@cronusx.uchicago.edu:/labs/jlmartinshare

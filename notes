@@ -1,5 +1,0 @@
-### Some Notes
-
-Part of the issue is that the way that the faculty members names appear in the ASA guides is not how their names appear in the MAG database. A consequential example of this is "Stephen Raudenbush", who in publications appears as "Stephen W. Raudenbush". One of the things that I think can be done is to do fuzzy matching but I am not sure if we can perform fuzzy matching without some more information.
-
-We could return all the entries in the MAG author names that are relatively close to entries in the network data using leventhstein distance, and manually inspecting them but that could be a lot of rows to look at. It will be important to think about what amount of coverage we are looking for. 
