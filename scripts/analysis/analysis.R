@@ -8,6 +8,10 @@ journal_df <- read.csv("data/trunc_journal_ranks.csv")
 
 authors <- read.csv("data/authors.csv")
 
+key <- read.csv("data/key_faculty2authors.csv")
+
+key <- key %>% select(faculty_name, network_name, AuthorId, NormalizedName)
+
 authors <- unique(authors)
 
 authors2papers2journals <- read.csv("data/edge_list.csv")
@@ -19,13 +23,13 @@ authors <- authors %>%
 
 journal_names <- read.csv("data/journals.csv")
 
-df = merge(x=df1,y=df2,by="CustomerId",all=TRUE)
+journal_df = merge(x = journal_names, y = journal_df, by=c("NormalizedName", "JournalId"), all=TRUE)
 
-#### Calcualting mean eigen scores for authors #####
+journal_df[is.na(journal_df)] <- 0
+
+##### Calcualting mean eigen scores for authors ######
 
 authors_df <- merge(authors2papers2journals, journal_df, by = "JournalId")
-
-authors_df <- merge(authors_df, authors, by = "AuthorId")
 
 authors_df <- authors_df %>%
   group_by(AuthorId) %>%
@@ -33,6 +37,11 @@ authors_df <- authors_df %>%
             n = n(), degree_mean = mean(degree), pca_mean = mean(pcoutrot_1), pcsqrt = mean(pcoutrot_sqrt))
 
 authors_df <- merge(authors_df, authors, by = "AuthorId")
+
+df <- merge(x=authors_df, y=key, by=c("NormalizedName", "AuthorId"), all.x=TRUE)
+
+df <- unique(df)
+
 
 authors_df <- authors_df %>% subset(pca_mean >= .02)
 
@@ -55,6 +64,8 @@ pcsrt <- ggplot(authors_df, aes(x = pcsqrt)) +
   geom_density() + ggtitle("Author Mean PCA")
 
 all.g <- ggpubr::ggarrange(eig, prank, deg, articles, pca, pcsrt)
+
+all.g
 
 ggsave("figures/author_scores.pdf", all.g)
 
