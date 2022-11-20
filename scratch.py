@@ -151,6 +151,10 @@ scp filter_mag.py timothyelder@midway3.rcc.uchicago.edu:/home/timothyelder/Docum
 
 scp net_projection.R timothyelder@cronusx.uchicago.edu:/home/timothyelder/mag/scripts
 
+scp title.akas.tsv timothyelder@cronusx.uchicago.edu: /labs/jlmartinshare/imdb
+
+
+
 scp -r timothyelder@midway3.rcc.uchicago.edu:/home/timothyelder/Documents/scripts /Users/timothyelder/Desktop
 
 scp -r timothyelder@midway3.rcc.uchicago.edu:/home/timothyelder/mag/data/disambig/edge_list.csv /Users/timothyelder/Documents/mag/data
@@ -190,3 +194,14 @@ scp faculty_df_complete.csv timothyelder@midway3.rcc.uchicago.edu:/home/timothye
 
 # for SCP the complete directory to JLMSHARE
 scp -r /mag timothyelder@cronusx.uchicago.edu:/labs/jlmartinshare
+
+
+scp -r soc_of_soc timothyelder@cronusx.uchicago.edu:/labs/jlmartinshare/soc_scans_backup_01_18_22
+scp -r soc_of_soc_scans timothyelder@cronusx.uchicago.edu:/labs/jlmartinshare/soc_scans_backup_01_18_22
+scp -r scans_raw_text.zip timothyelder@cronusx.uchicago.edu:/labs/jlmartinshare/soc_scans_backup_01_18_22
+
+scp -r /users/timothyelder/Documents/Zoom timothyelder@cronusx.uchicago.edu:/home/timothyelder
+
+scp -r /Volumes/dis_backup timothyelder@cronusx.uchicago.edu:/home/timothyelder/dis_data
+
+scp /users/timothyelder/Documents/Downloads_archive.zip timothyelder@cronusx.uchicago.edu:/home/timothyelder/dis_data
