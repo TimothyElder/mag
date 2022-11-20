@@ -11,18 +11,20 @@ aux_pattern = '(\S+)(.+)' # extra pattern for when the above doesn't match
 faculty_df_complete = pd.read_csv("/home/timothyelder/mag/data/faculty_df_complete.csv")
 faculty_names = faculty_df_complete['faculty_name'].to_list()
 
+# for index and name in faculty names
 for idx,i in enumerate(faculty_names):
-    i = re.sub(r';|:', ',', i)
+    i = re.sub(r';|:', ',', i) # replace semi-colons with commas
     # match regex to the file_name string
     if re.search(pattern, i) == None:
         match = re.search(aux_pattern, i)
         new_name = match.group(2) + ' ' + match.group(1)
         new_name = re.sub('\/', 'l', new_name, count=1) # replaces / for l, a common error
-        new_name = re.sub('\,', '', new_name, count=1)
-        new_name = new_name.lower()
-        new_name = new_name.strip()
+        new_name = re.sub('\,', '', new_name, count=1) # remove comma
+        new_name = re.sub('\.', '', new_name, count=1) # remove period
+        new_name = new_name.lower() # lower case
+        new_name = new_name.strip() # strip whitespace
 
-        faculty_names[idx] = new_name
+        faculty_names[idx] = new_name # substitute original name with normalized name
 
     else:
         # match regex to the file_name string
@@ -30,13 +32,12 @@ for idx,i in enumerate(faculty_names):
 
         new_name = match.group(2) + ' ' + match.group(1)
         new_name = re.sub('\/', 'l', new_name, count=1) # replaces / for l, a common error
-        new_name = re.sub('\,', '', new_name, count=1)
-        new_name = new_name.lower()
-        new_name = new_name.strip()
+        new_name = re.sub('\,', '', new_name, count=1) # remove comma
+        new_name = re.sub('\.', '', new_name, count=1) # remove period
+        new_name = new_name.lower() # lower case
+        new_name = new_name.strip() # strip whitespace
 
-    i = re.sub('.', '', i)
-
-        faculty_names[idx] = new_name
+        faculty_names[idx] = new_name # substitute original name with normalized name
 
 faculty_df_complete['network_name'] = faculty_names
 
